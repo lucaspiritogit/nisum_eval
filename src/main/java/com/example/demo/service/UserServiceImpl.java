@@ -15,6 +15,7 @@ import com.example.demo.dto.UserRequestDTO;
 import com.example.demo.entity.Phone;
 import com.example.demo.entity.User;
 import com.example.demo.exception.MailAlreadyExistsException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.jwtauth.JwtService;
 import com.example.demo.repository.UserRepository;
 
@@ -57,24 +58,21 @@ public class UserServiceImpl implements IUserService{
 	}
 	
 	@Override
-	public User updateUser(String id, UserRequestDTO userDTO) throws Exception {
-	    Optional<User> optionalUser = findUserById(id);
-	    if(!optionalUser.isPresent()) {
-	        throw new Exception("User not found for id " + id);
-	    }
-	    optionalUser.get().setName(userDTO.getName());
-	    optionalUser.get().setPassword(passwordEncoder.encode(userDTO.getPassword()));
-	    optionalUser.get().setEmail(userDTO.getEmail());
+	public User updateUser(String id, UserRequestDTO userDTO) throws UserNotFoundException {
+	    User user = findUserById(id).orElseThrow(() -> new UserNotFoundException());
+	    user.setName(userDTO.getName());
+	    user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+	    user.setEmail(userDTO.getEmail());
 	    List<Phone> phones = new ArrayList<>();
 	    for(Phone phone : userDTO.getPhones()) {
 	        phones.add(new Phone(phone.getNumber(), phone.getCityCode(), phone.getCountryCode()));
 	    }
-	    optionalUser.get().setPhones(phones);
-		String jwt = jwtService.createToken(new HashMap<>(), optionalUser.get());
-		optionalUser.get().setToken(jwt);
-		optionalUser.get().setModified(LocalDateTime.now());
-		userRepository.save(optionalUser.get());
-		return optionalUser.get();
+	    user.setPhones(phones);
+		String jwt = jwtService.createToken(new HashMap<>(), user);
+		user.setToken(jwt);
+		user.setModified(LocalDateTime.now());
+		userRepository.save(user);
+		return user;
 	}
 	
 	@Override

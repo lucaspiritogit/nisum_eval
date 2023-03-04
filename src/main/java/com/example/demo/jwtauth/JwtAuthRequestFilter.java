@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtAuth extends OncePerRequestFilter {
+public class JwtAuthRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
 	JwtService jwtService;
@@ -58,7 +58,7 @@ public class JwtAuth extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 			}
 		} catch (NoSuchElementException noSuchElement) {
-			String errorMessage = "El JWT en Authorization no concuerda con el email ingresado. Por cada modificacion al email se genera un nuevo token que se devuelve en la misma consulta por seguridad. Consultar en la base de datos.";
+			String errorMessage = "JWT no concuerda con el email ingresado. Si has editado el mail recientemente, tienes que usar la JWT que se genero con los nuevos datos. Consultar en la base de datos.";
 			int errorCode = HttpServletResponse.SC_UNAUTHORIZED;
 			String errorBody = "{\"mensaje\": \"" + errorMessage + "\"}";
 

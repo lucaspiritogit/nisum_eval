@@ -28,7 +28,7 @@ import com.example.demo.jwtauth.JwtService;
 import com.example.demo.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+public class UserServiceImplTest {
 
 	@Mock
 	private UserRepository userRepository;
