@@ -10,6 +10,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,9 @@ import com.example.demo.exception.MailAlreadyExistsException;
 import com.example.demo.exception.MailNotFoundException;
 import com.example.demo.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
+@Validated
 @RestController
 @RequestMapping("/api/v1/auth")
 public class UserAuthController {
@@ -52,8 +57,8 @@ public class UserAuthController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userDTO)
-			throws MailAlreadyExistsException, InvalidEmailFormatException {
+	public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userDTO)
+			throws MailAlreadyExistsException, InvalidEmailFormatException, MethodArgumentNotValidException {
 		
 		if (!userDTO.getEmail().matches(emailRegexp)) {
 			throw new InvalidEmailFormatException();

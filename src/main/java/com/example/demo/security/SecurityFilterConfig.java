@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.demo.jwtauth.JwtAuth;
+import com.example.demo.jwtauth.JwtAuthRequestFilter;
 
 // Importing this Path because Spring Security blocks the access to h2. This method would be insecure for a production application, but works for the demo.
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console; 
@@ -21,11 +21,11 @@ public class SecurityFilterConfig {
 	
 	
 	@Autowired
-	private JwtAuth jwtAuth;
+	private JwtAuthRequestFilter jwtAuth;
 	
 	private AuthenticationProvider authenticationProvider;
 	
-	public SecurityFilterConfig(JwtAuth jwtAuth, AuthenticationProvider authenticationProvider) {
+	public SecurityFilterConfig(JwtAuthRequestFilter jwtAuth, AuthenticationProvider authenticationProvider) {
 		super();
 		this.jwtAuth = jwtAuth;
 		this.authenticationProvider = authenticationProvider;

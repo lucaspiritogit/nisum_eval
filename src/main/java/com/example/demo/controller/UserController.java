@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.UserRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
 import com.example.demo.entity.User;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserServiceImpl;
 
 @RestController
@@ -28,14 +27,14 @@ public class UserController {
 	AuthenticationManager authManager;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserResponseDTO> getUser(@PathVariable String id) {
-		Optional<User> user = userService.findUserById(id);
+	public ResponseEntity<UserResponseDTO> getUser(@PathVariable String id) throws UserNotFoundException {
+		User user = userService.findUserById(id).orElseThrow(() -> new UserNotFoundException());
 		return ResponseEntity.ok().body(new UserResponseDTO(user));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<UserResponseDTO> editUser(@PathVariable String id, @RequestBody UserRequestDTO userDTO)
-			throws Exception {
+			throws UserNotFoundException {
 
 		User updatedUser = userService.updateUser(id, userDTO);
 		return ResponseEntity.ok().body(new UserResponseDTO(updatedUser));

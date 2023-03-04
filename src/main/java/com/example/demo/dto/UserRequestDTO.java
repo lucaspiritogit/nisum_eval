@@ -4,12 +4,21 @@ import java.util.List;
 
 import com.example.demo.entity.Phone;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class UserRequestDTO {
 
+	@NotNull(message = "El nombre no puede ser null")
+	@NotBlank(message = "El nombre no puede estar vacio")
 	private String name;
 
+	@NotNull(message = "La password no puede ser null")
+	@NotBlank(message = "La password no puede estar vacia")
 	private String password;
 
+	@NotNull(message = "El email no puede ser null")
+	@NotBlank(message = "El email no puede estar vacio")
 	private String email;
 
 	private List<Phone> phones;
