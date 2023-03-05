@@ -33,6 +33,14 @@ mvn clean install && mvn spring-boot:run
 
 ## API Endpoints
 
+_Agregue la collection de Postman para facilitar el testeo con la aplicacion en la carpeta:_
+
+```bash
+src/main/resources/postman_collection
+```
+
+Los endpoints que **requieran de JWT en el Header** se ingresan en la parte de Authorization > Bearer Token de Postman.
+
 ### Register **POST**
 
 **Requiere de JWT en Header?**: No 🔓
