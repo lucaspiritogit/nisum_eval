@@ -11,6 +11,8 @@ Esta aplicacion contiene:
 - Authenticacion mediante JWT
 - H2 (Base de datos en memoria)
 
+Aclaracion: El proyecto fue realizado con JDK 17.
+
 ## Setup
 
 1. Clonamos el repositorio en alguna carpeta, por ejemplo nuestro escritorio:
