@@ -202,7 +202,7 @@ Ejemplo de Response 200 ✅:
 }
 ```
 
-# Diagramas
+# Diagrama
 
 Si se necesitan ver el diagrama con mejor resolucion podemos ir a la carpeta:
 
@@ -212,6 +212,5 @@ src/resource/diagrams
 
 O descargarlo directamente desde github para pre-visualizarlos.
 
-## api/v1/auth
 
 ![Diagrama de flujo](./src/main/resources/diagrams/Diagrama-de-flujo.png)
