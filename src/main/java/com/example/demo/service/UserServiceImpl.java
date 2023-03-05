@@ -37,7 +37,6 @@ public class UserServiceImpl implements IUserService{
 	        throw new MailAlreadyExistsException();
 	    }
 		User userCreated = new User();
-		userCreated.setId(this.generateId());
 		userCreated.setName(userDTO.getName());
 		userCreated.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		userCreated.setEmail(userDTO.getEmail());
@@ -83,12 +82,5 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public Optional<User> findUserById(String id) {
 		return userRepository.findById(id);
-	}
-	
-	@Override
-	public String generateId() {
-		 UUID uuid = UUID.randomUUID();
-	     String uuidAsString = uuid.toString();
-	     return uuidAsString;
 	}
 }

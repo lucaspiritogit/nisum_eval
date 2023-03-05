@@ -14,6 +14,4 @@ public interface IUserService {
 	Optional<User> findUserByEmail(String email);
 	
 	Optional<User> findUserById(String id);
-	
-	String generateId();
 }
