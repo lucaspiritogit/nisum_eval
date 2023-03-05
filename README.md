@@ -196,10 +196,14 @@ Ejemplo de Response 200 ✅:
 
 # Diagramas
 
-Los diagramas se encuentran en:
+Si se necesitan ver el diagrama con mejor resolucion podemos ir a la carpeta:
 
 ```bash
 src/resource/diagrams
 ```
 
-![Diagrama de flujo API AUTH](./src/main/resources/diagrams/Auth.png)
+O descargarlo directamente desde github para pre-visualizarlos.
+
+## api/v1/auth
+
+![Diagrama de flujo](./src/main/resources/diagrams/Diagrama de flujo.png)
