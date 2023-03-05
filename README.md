@@ -206,4 +206,4 @@ O descargarlo directamente desde github para pre-visualizarlos.
 
 ## api/v1/auth
 
-![Diagrama de flujo](./src/main/resources/diagrams/Diagrama de flujo.png)
+![Diagrama de flujo](./src/main/resources/diagrams/Diagrama-de-flujo.png)
